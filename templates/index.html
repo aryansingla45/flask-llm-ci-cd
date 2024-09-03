@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Review System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload a YAML File for Code Review</h1>
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".yaml, .dockerfile, .jenkinsfile">
+            <input type="submit" value="Upload and Review">
+        </form>
+
+        {% if review %}
+        <div class="review-box">
+            <h2>Code Review Result:</h2>
+            <pre>{{ review }}</pre>
+        </div>
+        {% endif %}
+
+        {% if review %}
+        <div class="query-box">
+            <h2>Ask a question about the review:</h2>
+            <form method="post">
+                <textarea name="query" placeholder="Enter your question here..." rows="4"></textarea>
+                <input type="submit" value="Ask">
+            </form>
+        </div>
+        {% endif %}
+
+        {% if response %}
+        <div class="response-box">
+            <h2>LLM Response:</h2>
+            <pre>{{ response }}</pre>
+        </div>
+        {% endif %}
+
+        {% if review %}
+        <form method="post" action="{{ url_for('clear_session') }}">
+            <input type="submit" value="Clear Session">
+        </form>
+        {% endif %}
+    </div>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

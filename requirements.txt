@@ -1,0 +1,4 @@
+google-generativeai
+pytest
+Flask
+PyYAML
