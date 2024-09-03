@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import os
+import yaml
 from src.LLM import review_code
 from src.utils.review_utils import load_file
 import google.generativeai as genai
@@ -12,7 +13,7 @@ if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
 
 # Initialize LLM once with API key
-api_key = "your_api_key_here"
+api_key = "AIzaSyCtuuxWl4_WlBXjbRsMMU9Rh_ccp-KX5qc"
 genai.configure(api_key=api_key)
 
 generation_config = {
@@ -40,9 +41,9 @@ def index():
                 file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
                 file.save(file_path)
                 
-                # Load and review the YAML content
-                yaml_content = load_yaml(file_path)
-                review = review_code(str(yaml_content))
+                # Load and review the file content
+                file_content = load_file(file_path, request.form['pipeline_type'])
+                review = review_code(file_content if isinstance(file_content, str) else yaml.dump(file_content), request.form['pipeline_type'])
                 session['last_review'] = review  # Save the review result for further queries
                 
                 return render_template('index.html', review=review)

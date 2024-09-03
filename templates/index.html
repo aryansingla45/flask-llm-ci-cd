@@ -11,6 +11,11 @@
         <h1>Upload a YAML File for Code Review</h1>
         <form method="post" enctype="multipart/form-data">
             <input type="file" name="file" accept=".yaml, .dockerfile, .jenkinsfile">
+            <select name="pipeline_type" id="pipeline_type">
+                <option value="yaml">YAML</option>
+                <option value="docker">Docker</option>
+                <option value="jenkins">Jenkins</option>
+            </select>
             <input type="submit" value="Upload and Review">
         </form>
 
@@ -18,16 +23,6 @@
         <div class="review-box">
             <h2>Code Review Result:</h2>
             <pre>{{ review }}</pre>
-        </div>
-        {% endif %}
-
-        {% if review %}
-        <div class="query-box">
-            <h2>Ask a question about the review:</h2>
-            <form method="post">
-                <textarea name="query" placeholder="Enter your question here..." rows="4"></textarea>
-                <input type="submit" value="Ask">
-            </form>
         </div>
         {% endif %}
 
