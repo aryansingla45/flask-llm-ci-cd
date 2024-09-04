@@ -25,6 +25,6 @@ chat_session = model.start_chat(
 )
 
 def review_code(file_content, pipeline_type):
-    prompt = f"Please review the following {pipeline_type} configuration file for best practices, potential issues, and improvements:\n\n{file_content}"
+    prompt = f"Please review the following {pipeline_type} configuration file for syntax errors and return the improvised code.\n\n{file_content}"
     response = chat_session.send_message(prompt)
     return response.text

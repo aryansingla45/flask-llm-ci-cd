@@ -1,80 +1,54 @@
-/* static/css/styles.css */
-
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    color: #333;
     margin: 0;
     padding: 0;
 }
 
-.container {
-    max-width: 700px;
-    margin: 50px auto;
-    background: #fff;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
     text-align: center;
-    margin-bottom: 25px;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
+main {
+    padding: 2em;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-label {
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-select, input[type="file"] {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-input[type="submit"] {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 12px 20px;
+.review-content {
+    white-space: pre-wrap; /* Ensures that the content wraps and preserves whitespace */
+    background-color: #f9f9f9;
+    padding: 1em;
     border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+    border: 1px solid #ddd;
+    overflow-wrap: break-word; /* Ensures long words are wrapped */
+    word-wrap: break-word; /* Older property for compatibility */
 }
 
-input[type="submit"]:hover {
-    background-color: #218838;
+a {
+    color: #333;
+    text-decoration: none;
 }
 
-.review-box {
-    margin-top: 30px;
-    background: #f8f9fa;
-    padding: 15px;
+a:hover {
+    text-decoration: underline;
+}
+
+.home-button {
+    display: inline-block;
+    margin-top: 1em;
+    padding: 0.5em 1em;
+    background-color: #007bff;
+    color: #fff;
     border-radius: 5px;
+    text-align: center;
 }
 
-pre {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-}
-
-.flashes {
-    list-style-type: none;
-    padding: 0;
-    margin-bottom: 20px;
-}
-
-.flashes li {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 5px;
+.home-button:hover {
+    background-color: #0056b3;
 }

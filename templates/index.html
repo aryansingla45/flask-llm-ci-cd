@@ -3,42 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Review System</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>CI/CD Code Review</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Upload a YAML File for Code Review</h1>
-        <form method="post" enctype="multipart/form-data">
-            <input type="file" name="file" accept=".yaml, .dockerfile, .jenkinsfile">
-            <select name="pipeline_type" id="pipeline_type">
+    <header>
+        <h1>CI/CD Pipeline Code Review</h1>
+    </header>
+    <main>
+        <form id="uploadForm" method="POST" enctype="multipart/form-data">
+            <label for="pipeline_type">Select CI/CD Pipeline Type:</label>
+            <select name="pipeline_type" id="pipeline_type" required>
+                <option value="">--Select Pipeline--</option>
                 <option value="yaml">YAML</option>
-                <option value="docker">Docker</option>
+                <option value="docker">Dockerfile</option>
                 <option value="jenkins">Jenkins</option>
+                <option value="travis">Travis CI</option>
+                <option value="github_actions">GitHub Actions</option>
             </select>
-            <input type="submit" value="Upload and Review">
+            <br><br>
+            <label for="file">Upload File:</label>
+            <input type="file" name="file" id="file" required>
+            <br><br>
+            <button type="submit">Upload and Review</button>
         </form>
-
-        {% if review %}
-        <div class="review-box">
-            <h2>Code Review Result:</h2>
-            <pre>{{ review }}</pre>
-        </div>
-        {% endif %}
-
-        {% if response %}
-        <div class="response-box">
-            <h2>LLM Response:</h2>
-            <pre>{{ response }}</pre>
-        </div>
-        {% endif %}
-
-        {% if review %}
-        <form method="post" action="{{ url_for('clear_session') }}">
-            <input type="submit" value="Clear Session">
-        </form>
-        {% endif %}
-    </div>
+    </main>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 </html>

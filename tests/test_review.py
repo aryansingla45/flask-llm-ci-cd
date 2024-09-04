@@ -1,5 +1,3 @@
-# tests/test_review.py
-
 import pytest
 from src.LLM import review_code
 from src.utils.review_utils import load_file
@@ -19,5 +17,17 @@ def test_review_docker():
 def test_review_jenkins():
     jenkins_content = load_file('code_files/test.Jenkinsfile', 'jenkins')
     review = review_code(jenkins_content, 'jenkins')
+    assert isinstance(review, str)
+    assert "Best practices" in review  # Example assertion
+
+def test_review_travis():
+    travis_content = load_file('code_files/test.travis.yml', 'travis')
+    review = review_code(travis_content, 'travis')
+    assert isinstance(review, str)
+    assert "Best practices" in review  # Example assertion
+
+def test_review_github_actions():
+    github_actions_content = load_file('code_files/test.github.yml', 'github_actions')
+    review = review_code(github_actions_content, 'github_actions')
     assert isinstance(review, str)
     assert "Best practices" in review  # Example assertion

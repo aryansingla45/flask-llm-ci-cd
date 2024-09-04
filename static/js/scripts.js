@@ -1,28 +1,24 @@
-// static/js/scripts.js
+document.getElementById('uploadForm').addEventListener('submit', function(event) {
+    const pipelineType = document.getElementById('pipeline_type').value;
+    const file = document.getElementById('file').files[0];
 
-document.addEventListener('DOMContentLoaded', function() {
-    const pipelineTypeSelect = document.getElementById('pipeline_type');
-    const fileInput = document.getElementById('file');
+    if (!pipelineType || !file) {
+        alert('Please select a pipeline type and upload a file.');
+        event.preventDefault();
+        return;
+    }
 
-    pipelineTypeSelect.addEventListener('change', function() {
-        const selectedType = this.value;
-        let acceptTypes = '';
+    const fileExtension = file.name.split('.').pop().toLowerCase();
+    const pipelineFileMapping = {
+        'yaml': ['yaml', 'yml'],
+        'docker': ['dockerfile'],
+        'jenkins': ['jenkinsfile'],
+        'travis': ['travis.yml'],
+        'github_actions': ['yml', 'yaml']
+    };
 
-        switch(selectedType) {
-            case 'yaml':
-                acceptTypes = '.yaml,.yml';
-                break;
-            case 'docker':
-                acceptTypes = '.Dockerfile,.dockerfile,Dockerfile';
-                break;
-            case 'jenkins':
-                acceptTypes = '.Jenkinsfile,.jenkinsfile,Jenkinsfile';
-                break;
-            // Add more cases as needed
-            default:
-                acceptTypes = '';
-        }
-
-        fileInput.setAttribute('accept', acceptTypes);
-    });
+    if (!pipelineFileMapping[pipelineType].includes(fileExtension)) {
+        alert('Invalid file format for the selected pipeline type.');
+        event.preventDefault();
+    }
 });
